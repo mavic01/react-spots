@@ -7,15 +7,24 @@ import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 
 const Profile = () => {
   const dialogRef = useRef(null);
+  const editDialogRef = useRef(null);
   const galleryDialogRef = useRef(null);
 
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
+
   const [formData, setFormData] = useState({
     text: "",
     imageFile: null,
     imageUrl: "",
   });
+
+  const [editData, setEditData] = useState({
+    name: "Bessie Coleman",
+    job: "Civil Aviator",
+    imageFile: null,
+  });
+
   const [error, setError] = useState("");
   const [likedItems, setLikedItems] = useState({});
 
@@ -43,7 +52,7 @@ const Profile = () => {
       imageSrc = URL.createObjectURL(formData.imageFile);
     } else if (formData.imageUrl) {
       try {
-        new URL(formData.imageUrl); // basic URL validation
+        new URL(formData.imageUrl);
         imageSrc = formData.imageUrl;
       } catch {
         return setError("Invalid URL");
@@ -60,23 +69,46 @@ const Profile = () => {
 
   const openModal = () => dialogRef.current?.showModal();
   const closeModal = () => dialogRef.current?.close();
+  const openEditModal = () => editDialogRef.current?.showModal();
+  const closeEditModal = () => editDialogRef.current?.close();
+
+  const handleEditChange = (e) => {
+    const { name, value, files } = e.target;
+    setEditData((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value,
+    }));
+  };
+
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    // Save logic can go here — currently just closes modal
+    console.log("Profile updated:", editData);
+    closeEditModal();
+  };
+
   const openGalleryDialog = (card) => {
     setSelectedCard(card);
     galleryDialogRef.current?.showModal();
   };
+
   const closeGalleryDialog = () => galleryDialogRef.current?.close();
 
   return (
     <>
       <section className="profile">
-        <img className="profileImage" src="/Bessie-Coleman.png" alt="Profile" />
+        <img
+          className="profileImage"
+          src={editData.imageFile ? URL.createObjectURL(editData.imageFile) : "/Bessie-Coleman.png"}
+          alt="Profile"
+        />
 
         <div className="profileDetails">
           <div className="profileNameAndJob">
-            <h2 className="profileName">Bessie Coleman</h2>
-            <p className="profileJobTitle">Civil Aviator</p>
+            <h2 className="profileName">{editData.name}</h2>
+            <p className="profileJobTitle">{editData.job}</p>
           </div>
-          <p className="profileEdit">
+          <p className="profileEdit" onClick={openEditModal}>
             <img className="EditIcon" src="/Edit-Profile-Icon-Light.svg" alt="Edit" />
             Edit Profile
           </p>
@@ -87,6 +119,7 @@ const Profile = () => {
           New Post
         </button>
 
+        {/* New Post Modal */}
         <dialog id="newPostDialog" ref={dialogRef}>
           <button type="button" onClick={closeModal} style={{ float: "right", cursor: "pointer" }}>
             ❌
@@ -124,6 +157,52 @@ const Profile = () => {
 
       <div className="thin-line"></div>
 
+      {/* Edit Profile Modal */}
+      <dialog className="modal" ref={editDialogRef}>
+        <div className="flex">
+          <div className="modal-content">
+            <p className="closeBtn" onClick={closeEditModal} style={{ cursor: "pointer" }}>
+              ❌
+            </p>
+            <h2>Edit Profile</h2>
+            <form onSubmit={handleEditSubmit}>
+              <label htmlFor="editName">Name:</label>
+              <input
+                type="text"
+                id="editName"
+                name="name"
+                placeholder="Name"
+                value={editData.name}
+                onChange={handleEditChange}
+                required
+              />
+
+              <label htmlFor="editJob">Job Title:</label>
+              <input
+                type="text"
+                id="editJob"
+                name="job"
+                placeholder="Job Title"
+                value={editData.job}
+                onChange={handleEditChange}
+                required
+              />
+
+              <input
+                type="file"
+                name="imageFile"
+                id="editImage"
+                accept="image/*"
+                onChange={handleEditChange}
+              />
+
+              <button type="submit">Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+
+      {/* Gallery Section */}
       <div className="gallery_container">
         <Gallery />
         <div className="gallery_grid">
@@ -136,7 +215,7 @@ const Profile = () => {
                   icon={likedItems[index] ? solidHeart : regularHeart}
                   className={likedItems[index] ? "redd" : ""}
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent opening the modal
+                    e.stopPropagation();
                     toggleLike(index);
                   }}
                   style={{ cursor: "pointer" }}
@@ -149,6 +228,7 @@ const Profile = () => {
 
       <div className="thin-line"></div>
 
+      {/* Gallery Modal */}
       <dialog ref={galleryDialogRef} className="gallery-modal">
         {selectedCard && (
           <div className="gallery-modal-content">

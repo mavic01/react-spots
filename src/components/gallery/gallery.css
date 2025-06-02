@@ -96,18 +96,30 @@
   color: #555;
   margin-bottom: 1rem;
 }
-
+/* ------------------------------------------ */
 .dialog-box {
-  width: auto;
+  width: 40%;
   height: fit-content;
-  max-width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 15px 10px;
   border-radius: 10px;
+  position: fixed;
+  top: 2%;
+  left: 5%;
 }
+.dialog-box img {
+  width: 70%;
+  height: 30%;
+  object-fit: cover;
+}
+.desc {
+  font-size: .9rem;
+  text-align: center;
+}
+/* ------------------------------------------------- */
 
 
 .preview-dialog button {
@@ -140,6 +152,27 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
+  .dialog-box {
+  width: 55%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+  border-radius: 10px;
+  position: fixed;
+  top: 2%;
+  left: 5%;
+}
+.dialog-box img {
+  width: 70%;
+  height: 30%;
+  object-fit: cover;
+}
+.desc {
+  font-size: .9rem;
+}
 }
 
 @media (max-width: 768px) {
@@ -150,6 +183,27 @@
   .content p {
     font-size: 14px;
   }
+  .dialog-box {
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+  border-radius: 10px;
+  position: fixed;
+  top: 2%;
+  left: 5%;
+}
+.dialog-box img {
+  width: 70%;
+  height: 30%;
+  object-fit: cover;
+}
+.desc {
+  font-size: 1rem;
+}
 }
 
 @media (max-width: 480px) {
@@ -160,4 +214,25 @@
   .content p {
     font-size: 14px;
   }
+  .dialog-box {
+  width: 80%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+  border-radius: 10px;
+  position: fixed;
+  top: 2%;
+  left: 5%;
+}
+.dialog-box img {
+  width: 70%;
+  height: 30%;
+  object-fit: cover;
+}
+.desc {
+  font-size: .8rem;
+}
 }
