@@ -27,6 +27,7 @@ const Profile = () => {
 
   const [error, setError] = useState("");
   const [likedItems, setLikedItems] = useState({});
+  
 
   const toggleLike = (index) => {
     setLikedItems((prev) => ({
@@ -82,8 +83,6 @@ const Profile = () => {
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    // Save logic can go here — currently just closes modal
-    console.log("Profile updated:", editData);
     closeEditModal();
   };
 
