@@ -1,9 +1,10 @@
 import "./footer.css"
 
 const Footer = () => {
+  const presentYear = new Date().getFullYear()
   return (
     <footer>
-      <div>2024 &copy; Spots</div>
+      <div>{presentYear} &copy; Spots</div>
     </footer>
 
   )

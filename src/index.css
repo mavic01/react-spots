@@ -32,64 +32,12 @@ body {
 
 
 .gallery_container {
-  /* width: 100%; */
   width: 92%;
   margin: 0 auto;
   height: auto;
   padding: 0.5rem;
-  /* background-color: #fcf5e5; */
-}
-.gallery_grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  justify-content: center;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-.gallery_1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.gallery_1 .img1 {
-  width: 100%;
-  max-width: 450px;
-  height: auto;
-  border-radius: 5px;
 }
 
-.content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding-top: 8px;
-  padding-inline: 10px;
-}
-
-.content p {
-  flex: 1;
-  text-align: left;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 15px;
-}
-
-.gallery_1 .content i {
-  color: rgb(129, 127, 127);
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-}
-.gallery_1 .content i:hover {
-  color: #000;
-}
-/* .thin-line {
-  border: 1.5px solid rgba(33, 33, 33, 0.3);
-  width: 100%;
-  margin: 0.8rem 0;
-} */
 /* MEDIA QUARIES */
 
 @media (max-width: 900px) {
