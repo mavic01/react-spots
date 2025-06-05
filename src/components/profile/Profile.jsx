@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import "./profile.css";
 import Gallery from "../gallery/Gallery";
+import galleryItems from "../../../galleryDb.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
@@ -27,7 +28,6 @@ const Profile = () => {
 
   const [error, setError] = useState("");
   const [likedItems, setLikedItems] = useState({});
-  
 
   const toggleLike = (index) => {
     setLikedItems((prev) => ({
@@ -60,7 +60,8 @@ const Profile = () => {
       }
     }
 
-    if (!imageSrc) return setError("Please upload an image or provide a valid URL");
+    if (!imageSrc)
+      return setError("Please upload an image or provide a valid URL");
 
     setCards((prev) => [...prev, { text: formData.text, image: imageSrc }]);
     setFormData({ text: "", imageFile: null, imageUrl: "" });
@@ -98,7 +99,11 @@ const Profile = () => {
       <section className="profile">
         <img
           className="profileImage"
-          src={editData.imageFile ? URL.createObjectURL(editData.imageFile) : "/Bessie-Coleman.png"}
+          src={
+            editData.imageFile
+              ? URL.createObjectURL(editData.imageFile)
+              : "/Bessie-Coleman.png"
+          }
           alt="Profile"
         />
 
@@ -108,19 +113,31 @@ const Profile = () => {
             <p className="profileJobTitle">{editData.job}</p>
           </div>
           <p className="profileEdit" onClick={openEditModal}>
-            <img className="EditIcon" src="/Edit-Profile-Icon-Light.svg" alt="Edit" />
+            <img
+              className="EditIcon"
+              src="/Edit-Profile-Icon-Light.svg"
+              alt="Edit"
+            />
             Edit Profile
           </p>
         </div>
 
         <button className="profileBtn" onClick={openModal}>
-          <img className="newPostIcon" src="/New-Post-Icon.svg" alt="New Post" />
+          <img
+            className="newPostIcon"
+            src="/New-Post-Icon.svg"
+            alt="New Post"
+          />
           New Post
         </button>
 
         {/* New Post Modal */}
         <dialog id="newPostDialog" ref={dialogRef}>
-          <button type="button" onClick={closeModal} style={{ float: "right", cursor: "pointer" }}>
+          <button
+            type="button"
+            onClick={closeModal}
+            style={{ float: "right", cursor: "pointer" }}
+          >
             ❌
           </button>
           <div className="wrapperrr">
@@ -148,7 +165,9 @@ const Profile = () => {
                 onChange={handleInputChange}
               />
               {error && <small style={{ color: "red" }}>{error}</small>}
-              <button className="submitBtn" type="submit">Add Card</button>
+              <button className="submitBtn" type="submit">
+                Add Card
+              </button>
             </form>
           </div>
         </dialog>
@@ -160,7 +179,11 @@ const Profile = () => {
       <dialog className="modal" ref={editDialogRef}>
         <div className="flex">
           <div className="modal-content">
-            <p className="closeBtn" onClick={closeEditModal} style={{ cursor: "pointer" }}>
+            <p
+              className="closeBtn"
+              onClick={closeEditModal}
+              style={{ cursor: "pointer" }}
+            >
               ❌
             </p>
             <h2>Edit Profile</h2>
@@ -203,10 +226,14 @@ const Profile = () => {
 
       {/* Gallery Section */}
       <div className="gallery_container">
-        <Gallery />
+        <Gallery galleryItems={galleryItems} />
         <div className="gallery_grid">
           {cards.map((card, index) => (
-            <div className="gallery_1" key={index} onClick={() => openGalleryDialog(card)}>
+            <div
+              className="gallery_1"
+              key={index}
+              onClick={() => openGalleryDialog(card)}
+            >
               <img src={card.image} alt={card.text} className="img1" />
               <div className="content">
                 <p>{card.text}</p>
@@ -231,8 +258,14 @@ const Profile = () => {
       <dialog ref={galleryDialogRef} className="gallery-modal">
         {selectedCard && (
           <div className="gallery-modal-content">
-            <button onClick={closeGalleryDialog} className="close-btn">❌</button>
-            <img src={selectedCard.image} alt={selectedCard.text} className="modal-img" />
+            <button onClick={closeGalleryDialog} className="close-btn">
+              ❌
+            </button>
+            <img
+              src={selectedCard.image}
+              alt={selectedCard.text}
+              className="modal-img"
+            />
             <p className="modal-text">{selectedCard.text}</p>
           </div>
         )}

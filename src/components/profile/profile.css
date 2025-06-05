@@ -56,8 +56,8 @@
   color: var(--bessie-coleman);
   cursor: pointer;
 }
-/* /// */
-/* === Edit Profile Modal === */
+
+/*  Edit Profile Modal */
 .modal {
   background-color: white;
   border: none;
