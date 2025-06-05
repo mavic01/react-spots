@@ -18,6 +18,7 @@
   max-width: 450px;
   height: auto;
   border-radius: 5px;
+  object-fit: cover;
 }
 
 .content {

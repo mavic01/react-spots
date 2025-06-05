@@ -30,6 +30,15 @@ body {
   }
 }
 
+dialog::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
+}
+
+dialog {
+  scrollbar-width: none; /* For Firefox */
+  overflow: hidden; /* Prevents scrolling */
+}
+
 
 .gallery_container {
   width: 92%;

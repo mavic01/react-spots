@@ -255,7 +255,7 @@ const Profile = () => {
       <div className="thin-line"></div>
 
       {/* Gallery Modal */}
-      <dialog ref={galleryDialogRef} className="gallery-modal">
+      <dialog ref={galleryDialogRef} className="modal">
         {selectedCard && (
           <div className="gallery-modal-content">
             <button onClick={closeGalleryDialog} className="close-btn">
